@@ -1,4 +1,11 @@
 import unittest
+import sys
+import os
+
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_root)
+
 from app.main import app
 
 class BasicTests(unittest.TestCase):
@@ -18,7 +25,7 @@ class BasicTests(unittest.TestCase):
     def test_home_page_post_valid(self):
         response = self.app.post('/', data=dict(text="This is a test input"))
         self.assertEqual(response.status_code, 200)
-        # Assuming the response will contain the processed text or some result
+        
         self.assertIn(b"results", response.data)
 
     # Test the home page POST request with no input
